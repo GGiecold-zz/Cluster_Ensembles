@@ -1,0 +1,8 @@
+# Documentation
+include README
+
+# (Hyper)-graph partitioning
+recursive-include src/Cluster_Ensembles/Hypergraph_Partitioning *
+
+# Miscellaneous
+include LICENSE.txt
