@@ -4,8 +4,8 @@ A package for combining multiple partitions into a consolidated clustering. The 
 Installation
 ------------
 
-Cluster_Ensembles involves some Python and C code. You need Python 2.7, its Standard Library and the following packages:
-* NumPy (versioon 1.9.0 or any ulterior version);
+Cluster_Ensembles is written in Python and in C. You need Python 2.7, its Standard Library and the following packages:
+* NumPy (version 1.9.0 or any ulterior version);
 * SciPy
 * scikit-learn
 * setuptools
@@ -21,7 +21,17 @@ Upon completition of the steps outlined above, install Cluster_Ensembles by send
 * open a terminal console;
 * enter ```pip install Cluster_Ensembles```
 
-Any missing third-party dependency should be automatically resolved. The installation of this package also automatically compile under the hood and according to the specifications of your machine some code written in C that will later on be required by the Cluster_Ensembles package so as to determine a graph partition.
+Any missing third-party dependency should be automatically resolved. The installation of this package also automatically compile under the hood and according to the specifications of your machine some code written in C that will later on be required by the Cluster_Ensembles package so as to determine a graph partition. You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
+
+Usage
+-----
+
+```
+>>> import numpy as np
+>>> import Cluster_Ensembles as CE
+>>> cluster_runs = np.random.randint(0, 50, (50, 15000))
+>>> consensus_clustering_labels = CE.cluster_ensembles(cluster_runs, verbose = True, N_clusters_max = 50)
+```
 
 References
 ----------
