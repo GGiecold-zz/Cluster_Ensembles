@@ -41,7 +41,7 @@ References
 for Combining Multiple Partitions".
 In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
 
-Please Note
------------
+IMPORTANT NOTICE
+----------------
 
 A more detailed README file and expanded docstrings will be posted soon.
