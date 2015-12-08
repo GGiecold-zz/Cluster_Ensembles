@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 
-
-
 # Cluster_Ensembles/src/Cluster_Ensembles/Cluster_Ensembles.py;
 
 # Author: Gregory Giecold for the GC Yuan Lab
@@ -10,7 +8,7 @@
 # Contact: g.giecold@gmail.com, ggiecold@jimmy.harvard.edu
 
 
-r"""Cluster_Ensembles is a package for combining multiple partitions 
+"""Cluster_Ensembles is a package for combining multiple partitions 
 into a consolidated clustering.
 The combinatorial optimization problem of obtaining such a consensus clustering
 is reformulated in terms of approximation algorithms for 
@@ -27,12 +25,6 @@ In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
 """
 
 
-
-
-#*********************************************************************************
-#*********************************************************************************
-
-
 from __future__ import print_function
 
 import functools
@@ -40,7 +32,6 @@ import gc
 import numbers
 import numpy as np
 import operator
-from os import path
 import pkg_resources
 import scipy.sparse
 from sklearn.metrics import jaccard_similarity_score
@@ -54,27 +45,17 @@ np.seterr(invalid = 'ignore')
 warnings.filterwarnings('ignore', category = DeprecationWarning)
 
 
-#*********************************************************************************
-#*********************************************************************************
-
-
 __all__ = ['cluster_ensembles', 'CSPA', 'HGPA', 'MCLA', 'overlap_matrix']
 
 
-#***************************************************************************************
-# memory
-#***************************************************************************************
-
-
 def memory():
-    r"""Determine memory specifications of the machine.
+    """Determine memory specifications of the machine.
 
     Returns
     -------
     mem_info : dictonary
         Holds the current values for the total, free and used memory of the system.
     """
-
 
     mem_info = {}
 
@@ -92,13 +73,8 @@ def memory():
     return mem_info
 
 
-#***************************************************************************************
-# get_chunk_size
-#***************************************************************************************
-
-
 def get_chunk_size(N, n):
-    r"""Given a two-dimensional array with a dimension of size 'N', 
+    """Given a two-dimensional array with a dimension of size 'N', 
         determine the number of rows or columns that can fit into memory.
 
     Parameters
@@ -114,7 +90,6 @@ def get_chunk_size(N, n):
     chunk_size : int
         The size of the dimension orthogonal to the one of size 'N'. 
     """
-
 
     mem_free = memory()['free']
     if mem_free > 60000000:
@@ -142,13 +117,8 @@ def get_chunk_size(N, n):
         sys.exit(1)
 
 
-#*********************************************************************************
-# get_compression_filter
-#*********************************************************************************
-
-
 def get_compression_filter(byte_counts):
-    r"""Determine whether or not to use a compression on the array stored in
+    """Determine whether or not to use a compression on the array stored in
         a hierarchical data format, and which compression library to use to that purpose.
         Compression reduces the HDF5 file size and also helps improving I/O efficiency
         for large datasets.
@@ -161,7 +131,6 @@ def get_compression_filter(byte_counts):
     -------
     FILTERS : instance of the tables.Filters class
     """
-
 
     assert isinstance(byte_counts, numbers.Integral) and byte_counts > 0
     
@@ -178,13 +147,8 @@ def get_compression_filter(byte_counts):
     return FILTERS
 
 
-#*********************************************************************************
-# build_hypergraph_adjacency
-#*********************************************************************************
-
-
 def build_hypergraph_adjacency(cluster_runs):
-    r"""Return the adjacency matrix to a hypergraph, in sparse matrix representation.
+    """Return the adjacency matrix to a hypergraph, in sparse matrix representation.
     
     Parameters
     ----------
@@ -198,7 +162,6 @@ def build_hypergraph_adjacency(cluster_runs):
         provided at input.
     """
 
-
     N_runs = cluster_runs.shape[0]
 
     hypergraph_adjacency = create_membership_matrix(cluster_runs[0])
@@ -210,13 +173,8 @@ def build_hypergraph_adjacency(cluster_runs):
     return hypergraph_adjacency
 
 
-#***************************************************************************************
-# store_hypergraph_adjacency
-#***************************************************************************************
-
-
 def store_hypergraph_adjacency(hypergraph_adjacency, hdf5_file_name):
-    r"""Write an hypergraph adjacency to disk to disk in an HDF5 data structure.
+    """Write an hypergraph adjacency to disk to disk in an HDF5 data structure.
     
     Parameters
     ----------
@@ -224,7 +182,6 @@ def store_hypergraph_adjacency(hypergraph_adjacency, hdf5_file_name):
     
     hdf5_file_name : file handle or string
     """
-   
    
     assert(hypergraph_adjacency.__class__ == scipy.sparse.csr.csr_matrix)
     
@@ -248,13 +205,8 @@ def store_hypergraph_adjacency(hypergraph_adjacency, hdf5_file_name):
             ds[:] = array
 
 
-#***************************************************************************************
-# load_hypergraph_adjacency
-#***************************************************************************************
-
-
 def load_hypergraph_adjacency(hdf5_file_name):
-    r"""
+    """
     
     Parameters
     ----------
@@ -264,7 +216,6 @@ def load_hypergraph_adjacency(hdf5_file_name):
     -------
     hypergraph_adjacency : compressed sparse row matrix
     """
-
 
     with tables.open_file(hdf5_file_name, 'r+') as fileh:
         pars = []
@@ -276,14 +227,8 @@ def load_hypergraph_adjacency(hdf5_file_name):
     return hypergraph_adjacency
 
 
-#*********************************************************************************
-# cluster_ensembles
-#*********************************************************************************
-
-
-def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False, 
-                      N_clusters_max = None):
-    r"""Call up to three different functions for heuristic ensemble clustering
+def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False, N_clusters_max = None):
+    """Call up to three different functions for heuristic ensemble clustering
        (namely CSPA, HGPA and MCLA) then select as the definitive
        consensus clustering the one with the highest average mutual information score 
        between its vector of consensus labels and the vectors of labels associated to each
@@ -326,7 +271,6 @@ def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False,
     In: Journal of Machine Learning Research, 3, pp. 583-617. 2002  
     """
 
-
     if hdf5_file_name is None:
         hdf5_file_name = './Cluster_Ensembles.h5'
         fileh = tables.open_file(hdf5_file_name, 'w')
@@ -359,11 +303,6 @@ def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False,
         print('*****')
 
     return cluster_ensemble[np.argmax(score)]
-
-
-#*********************************************************************************
-# ceEvalMutual
-#*********************************************************************************
 
 
 def ceEvalMutual(cluster_runs, cluster_ensemble = None, verbose = False):
