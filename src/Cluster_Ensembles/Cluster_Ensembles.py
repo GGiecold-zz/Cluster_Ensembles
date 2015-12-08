@@ -1253,7 +1253,8 @@ def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
 
     data_consensus_adjacency = np.ones(indices_consensus_adjacency.size, dtype = int) 
 
-    consensus_adjacency = scipy.sparse.csr_matrix((data_consensus_adjacency, indices_consensus_adjacency, indptr_consensus_adjacency), shape = (N_consensus_labels, N_samples))
+    consensus_adjacency = scipy.sparse.csr_matrix((data_consensus_adjacency, indices_consensus_adjacency, indptr_consensus_adjacency), 
+                                                  shape = (N_consensus_labels, N_samples))
 
     fileh = tables.open_file(hdf5_file_name, 'r+')
     
