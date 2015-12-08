@@ -648,7 +648,7 @@ def HGPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
 
 
 def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
-    r"""Meta-CLustering Algorithm for a consensus function.
+    """Meta-CLustering Algorithm for a consensus function.
     
     Parameters
     ----------
@@ -672,7 +672,6 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
     """
 
-
     print('\n*****')
     print('INFO: Cluster_Ensembles: MCLA: consensus clustering using MCLA.')
 
@@ -693,7 +692,6 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
           "Starting computation of Jaccard similarity matrix.")
 
     # Next, obtain a matrix of pairwise Jaccard similarity scores between the rows of the hypergraph adjacency matrix.
-    
     with tables.open_file(hdf5_file_name, 'r+') as fileh:
         FILTERS = get_compression_filter(4 * (N_rows ** 2))
     
@@ -873,13 +871,8 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     return cluster_labels
 
 
-#*********************************************************************************
-# create_membership_matrix
-#*********************************************************************************
-
-
 def create_membership_matrix(cluster_run):
-    r"""For a label vector represented by cluster_run, constructs the binary 
+    """For a label vector represented by cluster_run, constructs the binary 
         membership indicator matrix. Such matrices, when concatenated, contribute 
         to the adjacency matrix for a hypergraph representation of an 
         ensemble of clusterings.
@@ -892,7 +885,6 @@ def create_membership_matrix(cluster_run):
     -------
     An adjacnecy matrix in compressed sparse row form.
     """
-
 
     cluster_run = np.asanyarray(cluster_run)
 
@@ -917,13 +909,8 @@ def create_membership_matrix(cluster_run):
         return scipy.sparse.csr_matrix((data, indices, indptr), shape = (cluster_ids.size, cluster_run.size))
 
 
-#*********************************************************************************
-# metis
-#*********************************************************************************
-
-
 def metis(hdf5_file_name, N_clusters_max):
-    r"""METIS algorithm by Karypis and Kumar. Partitions the induced similarity graph 
+    """METIS algorithm by Karypis and Kumar. Partitions the induced similarity graph 
         passed by CSPA.
 
     Parameters
@@ -945,7 +932,6 @@ def metis(hdf5_file_name, N_clusters_max):
     In: SIAM Journal on Scientific Computing, Vol. 20, No. 1, pp. 359-392, 1999.
     """
 
-
     file_name = wgraph(hdf5_file_name)
     labels = sgraph(N_clusters_max, file_name)
     subprocess.call(['rm', file_name])
@@ -953,13 +939,8 @@ def metis(hdf5_file_name, N_clusters_max):
     return labels
 
 
-#*********************************************************************************
-# hmetis
-#*********************************************************************************
-
-
 def hmetis(hdf5_file_name, N_clusters_max, w = None):
-    r"""Gives cluster labels ranging from 1 to N_clusters_max for 
+    """Gives cluster labels ranging from 1 to N_clusters_max for 
         hypergraph partitioning required for HGPA.
 
     Parameters
@@ -984,7 +965,6 @@ def hmetis(hdf5_file_name, N_clusters_max, w = None):
     Vol. 7, No. 1, pp. 69-79, 1999.
     """
 
-
     if w is None:
         file_name = wgraph(hdf5_file_name, None, 2)
     else:
@@ -995,11 +975,6 @@ def hmetis(hdf5_file_name, N_clusters_max, w = None):
     subprocess.call(['rm', file_name])
 
     return labels
-
-
-#*********************************************************************************
-# cmetis
-#*********************************************************************************
 
 
 def cmetis(hdf5_file_name, N_clusters_max, w = None):
