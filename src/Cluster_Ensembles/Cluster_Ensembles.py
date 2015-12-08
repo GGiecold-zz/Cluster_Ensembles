@@ -978,7 +978,7 @@ def hmetis(hdf5_file_name, N_clusters_max, w = None):
 
 
 def cmetis(hdf5_file_name, N_clusters_max, w = None):
-    r"""Returns cluster labellings ranging from 1 to N_clusters_max 
+    """Returns cluster labellings ranging from 1 to N_clusters_max 
         for hypergraph partitioning involved in MCLA.
 
     Parameters
@@ -1002,7 +1002,6 @@ def cmetis(hdf5_file_name, N_clusters_max, w = None):
     In: SIAM Journal on Scientific Computing, Vol. 20, No. 1, pp. 359-392, 1999.
     """
  
- 
     file_name = wgraph(hdf5_file_name, w, 1)
     labels = sgraph(N_clusters_max, file_name)
     labels = one_to_max(labels)
@@ -1012,13 +1011,8 @@ def cmetis(hdf5_file_name, N_clusters_max, w = None):
     return labels
 
 
-#*********************************************************************************
-# wgraph
-#*********************************************************************************
-
-
 def wgraph(hdf5_file_name, w = None, method = 0):
-    r"""Write a graph file in a format apposite to later use by METIS or HMETIS.
+    """Write a graph file in a format apposite to later use by METIS or HMETIS.
     
     Parameters
     ----------
@@ -1150,13 +1144,8 @@ def wgraph(hdf5_file_name, w = None, method = 0):
     return file_name
 
 
-#*********************************************************************************
-# sgraph
-#*********************************************************************************
-
-
 def sgraph(N_clusters_max, file_name):
-    r"""Runs METIS or hMETIS and returns the labels found by those 
+    """Runs METIS or hMETIS and returns the labels found by those 
         (hyper-)graph partitioning algorithms.
         
     Parameters
@@ -1172,7 +1161,6 @@ def sgraph(N_clusters_max, file_name):
         as a result of any of three approximation algorithms for consensus clustering 
         (either of CSPA, HGPA or MCLA).
     """
-
 
     if file_name == 'DO_NOT_PROCESS':
         return []
@@ -1223,13 +1211,8 @@ def sgraph(N_clusters_max, file_name):
     return labels
 
 
-#*********************************************************************************
-# overlap_matrix
-#*********************************************************************************
-
-
 def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
-    r"""Writes on disk (in an HDF5 file whose handle is provided as the first
+    """Writes on disk (in an HDF5 file whose handle is provided as the first
        argument to this function) a stack of matrices, each describing
        for a particular run the overlap of cluster ID's that are matching 
        each of the cluster ID's stored in 'consensus_labels' 
@@ -1255,7 +1238,6 @@ def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
     consensus_adjacency :
     """
 
-    
     if reduce(operator.mul, cluster_runs.shape, 1) == max(cluster_runs.shape):
         cluster_runs = cluster_runs.reshape(1, -1)
 
@@ -1327,7 +1309,4 @@ def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
     fileh.close()
 
     return cluster_dims_list, mutual_info_list, consensus_adjacency
-
-
-#*********************************************************************************
-#*********************************************************************************
+    
