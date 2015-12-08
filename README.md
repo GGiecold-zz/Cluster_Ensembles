@@ -21,7 +21,7 @@ Upon completition of the steps outlined above, install Cluster_Ensembles by send
 * open a terminal console;
 * enter ```pip install Cluster_Ensembles```
 
-Any missing third-party dependency should be automatically resolved. The installation of this package also automatically compile under the hood and according to the specifications of your machine some code written in C that will later on be required by the Cluster_Ensembles package so as to determine a graph partition. You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
+Any missing third-party dependency should be automatically resolved. As part of the installation of this package, some code written in C that will later on be required by the Cluster_Ensembles package to determine a graph partition is automatically compiled under the hood and according to the specifications of your machine. You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
 
 Usage
 -----
