@@ -14,7 +14,7 @@ The combinatorial optimization problem of obtaining such a consensus clustering
 is reformulated in terms of approximation algorithms for 
 graph or hyper-graph partitioning.
 
-Reference
+References
 ----------
 Giecold, G., Marco, E., Trippa, L. and Yuan, G.-C.,
 "Robust Inference of Cell Lineages", to appear
