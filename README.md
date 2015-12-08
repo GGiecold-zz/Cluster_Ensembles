@@ -15,7 +15,7 @@ As yet another prelimiary to running Cluster_Ensembles, you should also follow t
 * open a terminal console;
 * type in ```sudo dnf install glibc.i686``` (for a machine running on Fedora) or ```sudo apt-get install libc6.i386`` (on a Ubuntu platform)
 
-This will install the GNU C library required to run a 32-bit executable binary tasked with hyper-graph partitioning. Skipping this step will later account for an 'bad ELF interpreter' error message when trying to run the Cluster_Ensembles package.
+This will install the GNU C library that is required to run a 32-bit executable binary tasked with hyper-graph partitioning. Skipping this step will later account for an 'bad ELF interpreter' error message when trying to run the Cluster_Ensembles package.
 
 Upon completition of the steps outlined above, install Cluster_Ensembles by sending a request to the Python Package Index (PyPI) as follows:
 * open a terminal console;
