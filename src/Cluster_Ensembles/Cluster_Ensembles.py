@@ -306,7 +306,7 @@ def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False, N_cl
 
 
 def ceEvalMutual(cluster_runs, cluster_ensemble = None, verbose = False):
-    r"""Compute a weighted average of the mutual information with the known labels, 
+    """Compute a weighted average of the mutual information with the known labels, 
         the weights being proportional to the fraction of known labels.
 
     Parameters
@@ -358,13 +358,8 @@ def ceEvalMutual(cluster_runs, cluster_ensemble = None, verbose = False):
     return float(weighted_average_mutual_information) / N_labelled_indices
 
 
-#*********************************************************************************
-# checkcl
-#*********************************************************************************
-
-
 def checkcl(cluster_run, verbose = False):
-    r"""Ensure that a cluster labelling is in a valid format. 
+    """Ensure that a cluster labelling is in a valid format. 
 
     Parameters
     ----------
@@ -384,7 +379,6 @@ def checkcl(cluster_run, verbose = False):
         starts at zero and increases by 1 without any gap left.
     """
     
-
     cluster_run = np.asanyarray(cluster_run)
 
     if cluster_run.size == 0:
@@ -425,14 +419,9 @@ def checkcl(cluster_run, verbose = False):
 
     return cluster_run
 
-    
-#*********************************************************************************
-# one_to_max
-#*********************************************************************************
-
 
 def one_to_max(array_in):
-    r"""Alter a vector of cluster labels to a dense mapping. 
+    """Alter a vector of cluster labels to a dense mapping. 
         Given that this function is herein always called after passing 
         a vector to the function checkcl, one_to_max relies on the assumption 
         that cluster_run does not contain any NaN entries.
@@ -448,7 +437,6 @@ def one_to_max(array_in):
         A massaged version of the input vector of cluster identities.
     """
     
-
     x = np.asanyarray(array_in)
     N_in = x.size
     array_in = x.reshape(N_in)    
@@ -471,13 +459,8 @@ def one_to_max(array_in):
     return result
 
 
-#*********************************************************************************
-# checks
-#*********************************************************************************
-
-
 def checks(similarities, verbose = False):
-    r"""Check that a matrix is a proper similarity matrix and bring 
+    """Check that a matrix is a proper similarity matrix and bring 
         appropriate changes if applicable.
 
     Parameters
@@ -490,7 +473,6 @@ def checks(similarities, verbose = False):
         and of any step possibly taken to remediate such problem.
     """
     
-
     if similarities.size == 0:
         raise ValueError("\nERROR: Cluster_Ensembles: checks: the similarities "
                          "matrix provided as input happens to be empty.\n")
@@ -559,13 +541,8 @@ def checks(similarities, verbose = False):
                 print("\nINFO: Cluster_Ensembles: checks: issue corrected.")
 
 
-#*********************************************************************************
-# CSPA
-#*********************************************************************************
-
-
 def CSPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
-    r"""Cluster-based Similarity Partitioning Algorithm for a consensus function.
+    """Cluster-based Similarity Partitioning Algorithm for a consensus function.
     
     Parameters
     ----------
@@ -588,7 +565,6 @@ def CSPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     for Combining Multiple Partitions".
     In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
     """
-
 
     print('*****')
     print("INFO: Cluster_Ensembles: CSPA: consensus clustering using CSPA.")
@@ -637,13 +613,8 @@ def CSPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     return metis(hdf5_file_name, N_clusters_max)
 
 
-#*********************************************************************************
-# HGPA
-#*********************************************************************************
-
-
 def HGPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
-    r"""HyperGraph-Partitioning Algorithm for a consensus function.
+    """HyperGraph-Partitioning Algorithm for a consensus function.
     
     Parameters
     ----------
@@ -667,7 +638,6 @@ def HGPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
     """
     
-    
     print('\n*****')
     print("INFO: Cluster_Ensembles: HGPA: consensus clustering using HGPA.")
 
@@ -675,11 +645,6 @@ def HGPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
         N_clusters_max = int(np.nanmax(cluster_runs)) + 1
 
     return hmetis(hdf5_file_name, N_clusters_max)
-
-
-#*********************************************************************************
-# MCLA
-#*********************************************************************************
 
 
 def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
