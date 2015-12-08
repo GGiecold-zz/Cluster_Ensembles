@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 
-
-
 # Cluster_Ensembles/setup.py;
 
 # Author: Gregory Giecold for the GC Yuan Lab
@@ -10,7 +8,7 @@
 # Contact: g.giecold@gmail.com, ggiecold@jimmy.harvard.edu
 
 
-r"""Setup script for Cluster_Ensembles, a package for combining multiple
+"""Setup script for Cluster_Ensembles, a package for combining multiple
 partitions into a consolidated clustering.
 The combinatorial optimization problem of obtaining such a consensus clustering
 is reformulated in terms of approximation algorithms for 
@@ -27,12 +25,6 @@ In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
 """
 
 
-
-
-#*********************************************************************************
-#*********************************************************************************
-
-
 from codecs import open
 from os import path
 from sys import exit, version
@@ -41,10 +33,6 @@ from setuptools.command.install import install
 import subprocess
 
 
-#*********************************************************************************
-#*********************************************************************************
-    
-    
 here = path.abspath(path.dirname(__file__))
 
 
@@ -157,9 +145,4 @@ setup(name = 'Cluster_Ensembles',
                  "machine-learning MCLA partition pattern-recognition "
                  "unsupervised-learning", 
 )
-
-
-#*********************************************************************************
-#*********************************************************************************
-
 
