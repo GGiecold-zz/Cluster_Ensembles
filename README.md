@@ -23,11 +23,13 @@ On a Debian or Ubuntu platform, the following commands should yield the same out
 * type in: ```sudo dpkg --add-architecture i386``` to add the i386 architecture;
 * enter: ```sudo apt-get install libc6:i386```.
 
-Upon completition of the steps outlined above, install Cluster_Ensembles by sending a request to the Python Package Index (PyPI) as follows:
+Upon completion of the steps outlined above, install Cluster_Ensembles by sending a request to the Python Package Index (PyPI) as follows:
 * open a terminal console;
 * enter ```pip install Cluster_Ensembles```.
 
-Any missing third-party dependency should be automatically resolved. As part of the installation of this package, some code written in C that will later on be required by the Cluster_Ensembles package to determine a graph partition is automatically compiled under the hood and according to the specifications of your machine. You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
+Any missing third-party dependency should be automatically resolved. 
+Please note that as part of the installation of this package, some code written in C that will later on be required by the Cluster_Ensembles package to determine a graph partition is automatically compiled under the hood and according to the specifications of your machine. 
+You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
 
 Usage
 -----
