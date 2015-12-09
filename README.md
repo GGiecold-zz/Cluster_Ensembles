@@ -11,7 +11,8 @@ Cluster_Ensembles is written in Python and in C. You need Python 2.7, its Standa
 * setuptools
 * PyTables
 
-As yet another prelimiary to running Cluster_Ensembles, you should also follow the instructions below:
+As yet another prelimiary to running Cluster_Ensembles, you should also follow the few more instructions below.
+
 On CentOS, Fedora or some Red Hat Linux distribution:
 * open a terminal console;
 * type in: ```sudo dnf install glibc.i686```.
