@@ -21,7 +21,7 @@ This will install the GNU C library that is required to run a 32-bit executable 
 On a Debian or Ubuntu platform, the following commands should yield the same outcome:
 * open a terminal console;
 * type in: ```sudo dpkg --add-architecture i386``` to add the i386 architecture;
-* enter: ```sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386```.
+* enter: ```sudo apt-get install libc6:i386```.
 
 Upon completition of the steps outlined above, install Cluster_Ensembles by sending a request to the Python Package Index (PyPI) as follows:
 * open a terminal console;
