@@ -12,15 +12,20 @@ Cluster_Ensembles is written in Python and in C. You need Python 2.7, its Standa
 * PyTables
 
 As yet another prelimiary to running Cluster_Ensembles, you should also follow the instructions below:
+On CentOS, Fedora or some Red Hat Linux distribution:
 * open a terminal console;
-* on CentOS, Fedora or a some Red Hat Linux distribution, type in: ```sudo dnf install glibc.i686``` ; 
-* on a Debian or Ubuntu platform, enter: ```sudo apt-get install libc6.i386`` .
+* type in: ```sudo dnf install glibc.i686```.
 
 This will install the GNU C library that is required to run a 32-bit executable binary with a 64-bit Linux kernel. This executable is tasked with hyper-graph partitioning. Skipping this step would result in a 'bad ELF interpreter' error message when subsequently trying to run the Cluster_Ensembles package.
 
+On a Debian or Ubuntu platform, the following commands should yield the same outcome:
+* open a terminal console;
+* type in: ```sudo dpkg --add-architecture i386``` to add the i386 architecture;
+* enter: ```sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386```.
+
 Upon completition of the steps outlined above, install Cluster_Ensembles by sending a request to the Python Package Index (PyPI) as follows:
 * open a terminal console;
-* enter ```pip install Cluster_Ensembles```
+* enter ```pip install Cluster_Ensembles```.
 
 Any missing third-party dependency should be automatically resolved. As part of the installation of this package, some code written in C that will later on be required by the Cluster_Ensembles package to determine a graph partition is automatically compiled under the hood and according to the specifications of your machine. You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
 
