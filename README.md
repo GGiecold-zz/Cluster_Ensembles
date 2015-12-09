@@ -16,7 +16,7 @@ On CentOS, Fedora or some Red Hat Linux distribution:
 * open a terminal console;
 * type in: ```sudo dnf install glibc.i686```.
 
-This will install the GNU C library that is required to run a 32-bit executable binary with a 64-bit Linux kernel. This executable is tasked with hyper-graph partitioning. Skipping this step would result in a 'bad ELF interpreter' error message when subsequently trying to run the Cluster_Ensembles package.
+This will install the GNU C library that is required to run a 32-bit executable binary with a 64-bit Linux kernel. This executable is tasked with hyper-graph partitioning. Skipping this step would result in a ```bad ELF interpreter``` error message when subsequently trying to run the Cluster_Ensembles package.
 
 On a Debian or Ubuntu platform, the following commands should yield the same outcome:
 * open a terminal console;
