@@ -50,6 +50,15 @@ References
 * A. Strehl and J. Ghosh, "Cluster Ensembles - A Knowledge Reuse Framework
 for Combining Multiple Partitions".
 In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
+* Kernighan, B. W. and Lin, S., "An Efficient Heuristic Procedure 
+for Partitioning Graphs". 
+In: The Bell System Technical Journal, 49, 2, pp. 291-307. 1970
+* Karypis, G., Aggarwal, R., Kumar, V. and Shekhar, S., "Multilevel Hypergraph Partitioning: 
+Applications in the VLSI Domain".
+In: IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 7, 1, pp. 69-79, 1999
+* Karypis, G. and Kumar, V., "A Fast and High Quality Multilevel Scheme 
+for Partitioning Irregular Graphs"
+In: SIAM Journal on Scientific Computing, 20, 1, pp. 359-392, 1998
 
 IMPORTANT NOTICE
 ----------------
