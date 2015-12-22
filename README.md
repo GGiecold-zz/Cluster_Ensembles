@@ -47,7 +47,7 @@ References
 ----------
 * Giecold, G., Marco, E., Trippa, L. and Yuan, G.-C.,
 "Robust Inference of Cell Lineages", to submitted for publication
-* A. Strehl and J. Ghosh, "Cluster Ensembles - A Knowledge Reuse Framework
+* Strehl, A. and Ghosh, J., "Cluster Ensembles - A Knowledge Reuse Framework
 for Combining Multiple Partitions".
 In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
 * Kernighan, B. W. and Lin, S., "An Efficient Heuristic Procedure 
