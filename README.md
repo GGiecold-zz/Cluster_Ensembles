@@ -46,7 +46,8 @@ Usage
 References
 ----------
 * Giecold, G., Marco, E., Trippa, L. and Yuan, G.-C.,
-"Robust Inference of Cell Lineages", to submitted for publication
+"Robust Inference of Cell Lineages".
+Submitted for publication
 * Strehl, A. and Ghosh, J., "Cluster Ensembles - A Knowledge Reuse Framework
 for Combining Multiple Partitions".
 In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
@@ -54,7 +55,7 @@ In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
 for Partitioning Graphs". 
 In: The Bell System Technical Journal, 49, 2, pp. 291-307. 1970
 * Karypis, G. and Kumar, V., "A Fast and High Quality Multilevel Scheme 
-for Partitioning Irregular Graphs"
+for Partitioning Irregular Graphs".
 In: SIAM Journal on Scientific Computing, 20, 1, pp. 359-392. 1998
 * Karypis, G., Aggarwal, R., Kumar, V. and Shekhar, S., "Multilevel Hypergraph Partitioning: 
 Applications in the VLSI Domain".
