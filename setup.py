@@ -73,7 +73,7 @@ with open(path.join(here, 'README'), encoding = 'utf-8') as f:
     
 
 setup(name = 'Cluster_Ensembles',
-      version = '1.14',
+      version = '1.16',
       
       description = "A package for determining the consensus clustering from " 
                     "an ensemble of partitions",
