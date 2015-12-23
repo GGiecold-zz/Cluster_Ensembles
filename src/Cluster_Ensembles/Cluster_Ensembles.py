@@ -57,7 +57,8 @@ np.seterr(invalid = 'ignore')
 warnings.filterwarnings('ignore', category = DeprecationWarning)
 
 
-__all__ = ['cluster_ensembles', 'CSPA', 'HGPA', 'MCLA', 'overlap_matrix']
+__all__ = ['cluster_ensembles', 'CSPA', 'HGPA', 'load_hypergraph_adjacency',
+           'MCLA', 'overlap_matrix']
 
 
 def memory():
