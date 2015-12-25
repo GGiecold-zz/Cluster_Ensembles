@@ -69,8 +69,3 @@ In: SIAM Journal on Scientific Computing, 20, 1, pp. 359-392. 1998
 * Karypis, G., Aggarwal, R., Kumar, V. and Shekhar, S., "Multilevel Hypergraph Partitioning: 
 Applications in the VLSI Domain".
 In: IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 7, 1, pp. 69-79. 1999
-
-IMPORTANT NOTICE
-----------------
-
-A more detailed README file and expanded docstrings will be posted soon.
