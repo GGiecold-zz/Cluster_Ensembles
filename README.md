@@ -43,7 +43,7 @@ Say that you have an array of shape (M, N) where each row corresponds to a vecto
 The few lines below illustrate how to submit consensus clustering analysis such an ```cluster_runs``` (M, N) array of cluster labels. 
 A vector holding the consensus clustering identities for each of the N samples in your dataset, ```consensus_clustering_labels```, is returned.
 
-Please note that each of the M vectors of clustering labels can correspond to the partition of the samples into different numbers of overall clusters. Cluster_Ensembles therefore offers the possibility of seeking a consensus clustering from the aggregation of a clustering of your dataset into 10 clusters, another clustering of a subsample of your dataset into 5 clusters, yet another clustering of your dataset into 20 clusters, etc. Those choices are entirely up to you. Pretty much all that is required for Cluster_Ensembles is an array of clustering vectors.
+Please note that those M vectors of clustering labels can correspond to partitions of the samples into distinct numbers of overall clusters. Cluster_Ensembles therefore offers the possibility of seeking a consensus clustering from the aggregation of a clustering of your dataset into 10 groups, another clustering of a fraction of your samples into 5 clusters, yet another partition of your dataset into 20 clusters, etc. Those choices are entirely up to you. Pretty much all that is required for Cluster_Ensembles is an array of clustering vectors.
 
 ```
 >>> import numpy as np
