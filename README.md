@@ -12,6 +12,8 @@ Cluster_Ensembles is written in Python and in C. You need Python 2.7, its Standa
 * setuptools
 * PyTables
 
+The ```pip install Cluster_Ensembles``` command mentioned below should automatically detect and, if applicable, install or update any of the afore-mentioned dependencies.
+
 As yet another prelimiary to running Cluster_Ensembles, you should also follow the few more instructions below.
 
 On CentOS, Fedora or some Red Hat Linux distribution:
@@ -35,6 +37,11 @@ You therefore need to ensure availability of ```CMake``` and ```GNU make``` on y
 
 Usage
 -----
+
+Say that you have an array of shape (M, N) where each row corresponds to a vector reporting the cluster label of each sample of your dataset. It is possible that some of those samples have been left out of consideration from some of those M clusterings; in this case, the corresponding entry is tagged as NaN. 
+
+The few lines below illustrate how to submit such an ```cluster_runs``` (M, N) array of cluster labels for consensus clustering. 
+A vector of consensus clustering identities for each of the N samples in your dataset, ```consensus_clustering_labels```, is returned.
 
 ```
 >>> import numpy as np
