@@ -6,7 +6,7 @@ Installation
 
 Cluster_Ensembles is written in Python and in C. You need Python 2.7, its Standard Library and the following packages:
 * numexpr (version 2.4.0 or later)
-* NumPy (version 1.9.0 or any ulterior version);
+* NumPy (version 1.9.0 or any ulterior version)
 * SciPy
 * scikit-learn
 * setuptools
