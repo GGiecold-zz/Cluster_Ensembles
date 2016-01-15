@@ -55,8 +55,8 @@ Please note that those M vectors of clustering labels can correspond to partitio
 References
 ----------
 * Giecold, G., Marco, E., Trippa, L. and Yuan, G.-C.,
-"Robust Inference of Cell Lineages".
-Submitted for publication
+"Robust Lineage Reconstruction from High-Dimensional Single-Cell Data". 
+ArXiv preprint [q-bio.QM, stat.AP, stat.CO, stat.ML]: http://arxiv.org/abs/1601.02748
 * Strehl, A. and Ghosh, J., "Cluster Ensembles - A Knowledge Reuse Framework
 for Combining Multiple Partitions".
 In: Journal of Machine Learning Research, 3, pp. 583-617. 2002
