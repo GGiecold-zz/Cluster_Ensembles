@@ -17,7 +17,8 @@ graph or hyper-graph partitioning.
 References
 ----------
 * Giecold, G., Marco, E., Trippa, L. and Yuan, G.-C.,
-"Robust Inference of Cell Lineages", to submitted for publication
+"Robust Lineage Reconstruction from High-Dimensional Single-Cell Data". 
+ArXiv preprint [q-bio.QM, stat.AP, stat.CO, stat.ML]: http://arxiv.org/abs/1601.02748
 
 * Strehl, A. and Ghosh, J., "Cluster Ensembles - A Knowledge Reuse Framework
 for Combining Multiple Partitions".
