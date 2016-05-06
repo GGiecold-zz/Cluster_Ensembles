@@ -35,6 +35,8 @@ Any missing third-party dependency should be automatically resolved.
 Please note that as part of the installation of this package, some code written in C that will later on be required by the Cluster_Ensembles package to determine a graph partition is automatically compiled under the hood and according to the specifications of your machine. 
 You therefore need to ensure availability of ```CMake``` and ```GNU make``` on your operating system.
 
+At any rate, to make sure that third-party dependecy software was automatically installed open a terminal window and type, for example, ```gpmetis -help```. If you don't get a help screen, please manually install [METIS - Serial Graph Partitioning and Fill-reducing Matrix Ordering] (http://glaros.dtc.umn.edu/gkhome/metis/metis/overview). On Ubuntu run the command ```sudo apt-get install metis```.
+
 Usage
 -----
 
@@ -43,7 +45,7 @@ Say that you have an array of shape (M, N) where each row corresponds to a vecto
 The few lines below illustrate how to submit consensus clustering analysis such an ```cluster_runs``` (M, N) array of cluster labels. 
 A vector holding the consensus clustering identities for each of the N samples in your dataset, ```consensus_clustering_labels```, is returned.
 
-Please note that those M vectors of clustering labels can correspond to partitions of the samples into distinct numbers of overall clusters. Cluster_Ensembles therefore offers the possibility of seeking a consensus clustering from the aggregation of a clustering of your dataset into, say, 10 groups, another clustering of a fraction of your samples into 5 clusters, yet another partition of your dataset into 20 clusters, etc. Those choices are entirely up to you. Pretty much all that is required for Cluster_Ensembles is an array of clustering vectors.
+Please note that those M vectors of clustering labels can correspond to partitions of the samples into distinct numbers of overall clusters. Cluster_Ensembles therefore offers the possibility of seeking a consensus clustering from the aggregation of a clustering of your dataset into, say, 10 groups, another clustering of a fraction of your samples into 5 clusters, yet another partition of your dataset into 20 clusters, etc. Those choices are entirely up to you. Pretty much all that is required for Cluster_Ensembles is an array of clustering vectors. 
 
 ```
 >>> import numpy as np
