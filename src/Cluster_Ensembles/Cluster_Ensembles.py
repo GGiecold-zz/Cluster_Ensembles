@@ -287,9 +287,9 @@ def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False, N_cl
 
     if hdf5_file_name is None:
         hdf5_file_name = './Cluster_Ensembles.h5'
-        fileh = tables.open_file(hdf5_file_name, 'w')
-        fileh.create_group(fileh.root, 'consensus_group')
-        fileh.close()
+    fileh = tables.open_file(hdf5_file_name, 'w')
+    fileh.create_group(fileh.root, 'consensus_group')
+    fileh.close()
 
     cluster_ensemble = []
     score = np.empty(0)
