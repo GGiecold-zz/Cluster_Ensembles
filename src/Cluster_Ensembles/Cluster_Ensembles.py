@@ -38,7 +38,7 @@ In: IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 7, 1, pp. 
 """
 
 
-from __future__ import print_function
+
 
 import functools
 import gc
@@ -54,6 +54,9 @@ import subprocess
 import sys
 import tables
 import warnings
+import six
+from six.moves import range
+from functools import reduce
 
 np.seterr(invalid = 'ignore')
 warnings.filterwarnings('ignore', category = DeprecationWarning)
@@ -74,7 +77,7 @@ def memory():
 
     mem_info = dict()
 
-    for k, v in psutil.virtual_memory().__dict__.iteritems():
+    for k, v in six.iteritems(psutil.virtual_memory().__dict__):
            mem_info[k] = int(v)
            
     return mem_info
@@ -172,7 +175,7 @@ def build_hypergraph_adjacency(cluster_runs):
     N_runs = cluster_runs.shape[0]
 
     hypergraph_adjacency = create_membership_matrix(cluster_runs[0])
-    for i in xrange(1, N_runs):
+    for i in range(1, N_runs):
         hypergraph_adjacency = scipy.sparse.vstack([hypergraph_adjacency,
                                                    create_membership_matrix(cluster_runs[i])], 
                                                    format = 'csr')
@@ -302,7 +305,7 @@ def cluster_ensembles(cluster_runs, hdf5_file_name = None, verbose = False, N_cl
     hypergraph_adjacency = build_hypergraph_adjacency(cluster_runs)
     store_hypergraph_adjacency(hypergraph_adjacency, hdf5_file_name)
 
-    for i in xrange(len(consensus_functions)):
+    for i in range(len(consensus_functions)):
         cluster_ensemble.append(consensus_functions[i](hdf5_file_name, cluster_runs, verbose, N_clusters_max))
         score = np.append(score, ceEvalMutual(cluster_runs, cluster_ensemble[i], verbose))
         print("\nINFO: Cluster_Ensembles: cluster_ensembles: "
@@ -350,7 +353,7 @@ def ceEvalMutual(cluster_runs, cluster_ensemble = None, verbose = False):
 
     N_labelled_indices = 0
 
-    for i in xrange(cluster_runs.shape[0]):
+    for i in range(cluster_runs.shape[0]):
         labelled_indices = np.where(np.isfinite(cluster_runs[i]))[0]
         N = labelled_indices.size
 
@@ -453,7 +456,7 @@ def one_to_max(array_in):
 
     last = np.nan
     current_index = -1
-    for i in xrange(N_in):
+    for i in range(N_in):
         if last != sorted_array[i] or np.isnan(last):
             last = sorted_array[i]
             current_index += 1
@@ -613,7 +616,7 @@ def CSPA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
         expr.eval()
 
         chunks_size = get_chunk_size(N_samples, 3)
-        for i in xrange(0, N_samples, chunks_size):
+        for i in range(0, N_samples, chunks_size):
             tmp = S[i:min(i+chunks_size, N_samples)]
             S[i:min(i+chunks_size, N_samples)] = np.rint(tmp)
 
@@ -718,7 +721,7 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
         squared_sums = np.squeeze(np.asarray(squared_sums))
 
         chunks_size = get_chunk_size(N_rows, 7)
-        for i in xrange(0, N_rows, chunks_size):
+        for i in range(0, N_rows, chunks_size):
             n_dim = min(chunks_size, N_rows - i)
 
             temp = squared_MCLA[i:min(i+chunks_size, N_rows), :].todense()
@@ -760,11 +763,11 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
                                   filters = FILTERS)  
  
     chunks_size = get_chunk_size(N_samples, 7)
-    for i in xrange(0, N_consensus, chunks_size):
+    for i in range(0, N_consensus, chunks_size):
         x = min(chunks_size, N_consensus - i)
         matched_clusters = np.where(cluster_labels == np.reshape(np.arange(i, min(i + chunks_size, N_consensus)), newshape = (x, 1)))
         M = np.zeros((x, N_samples))
-        for j in xrange(x):
+        for j in range(x):
             coord = np.where(matched_clusters[0] == j)[0]
             M[j] = np.asarray(hypergraph_adjacency[matched_clusters[1][coord], :].mean(axis = 0))
         clb_cum[i:min(i+chunks_size, N_consensus)] = M
@@ -782,7 +785,7 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
         null_columns = np.where(clb_cum[:].sum(axis = 0) == 0)[0]
     else:
         szumsz = np.zeros(0)
-        for i in xrange(N_chunks):
+        for i in range(N_chunks):
             M = clb_cum[:, i*chunks_size:(i+1)*chunks_size]
             szumsz = np.append(szumsz, M.sum(axis = 0))
         if remainder != 0:
@@ -806,7 +809,7 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     if N_chunks == 0:
         tmp[:] = random_state.rand(N_consensus, N_samples)
     else:
-        for i in xrange(N_chunks):
+        for i in range(N_chunks):
             tmp[i*chunks_size:(i+1)*chunks_size] = random_state.rand(chunks_size, N_samples)
         if remainder !=0:
             tmp[N_chunks*chunks_size:N_consensus] = random_state.rand(remainder, N_samples)
@@ -825,7 +828,7 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
         sum_diag = tmp[:].sum(axis = 0)
     else:
         sum_diag = np.empty(0)
-        for i in xrange(N_chunks):
+        for i in range(N_chunks):
             M = tmp[:, i*chunks_size:(i+1)*chunks_size]
             sum_diag = np.append(sum_diag, M.sum(axis = 0))
         if remainder != 0:
@@ -842,7 +845,7 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
         max_entries = np.amax(clb_cum, axis = 0)
     else:
         max_entries = np.zeros(N_samples)
-        for i in xrange(N_chunks):
+        for i in range(N_chunks):
             clb_cum[:, i*chunks_size:(i+1)*chunks_size] *= inv_sum_diag[i*chunks_size:(i+1)*chunks_size]
             max_entries[i*chunks_size:(i+1)*chunks_size] = np.amax(clb_cum[:, i*chunks_size:(i+1)*chunks_size], axis = 0)
         if remainder != 0:
@@ -853,7 +856,7 @@ def MCLA(hdf5_file_name, cluster_runs, verbose = False, N_clusters_max = None):
     winner_probabilities = np.zeros(N_samples)
     
     chunks_size = get_chunk_size(N_samples, 2)
-    for i in reversed(xrange(0, N_consensus, chunks_size)):
+    for i in reversed(range(0, N_consensus, chunks_size)):
         ind = np.where(np.tile(max_entries, (min(chunks_size, N_consensus - i), 1)) == clb_cum[i:min(i+chunks_size, N_consensus)])
         cluster_labels[ind[1]] = i + ind[0]
         winner_probabilities[ind[1]] = clb_cum[(ind[0] + i, ind[1])]       
@@ -1086,7 +1089,7 @@ def wgraph(hdf5_file_name, w = None, method = 0):
                 sz = float(np.sum(e_mat[:] > 0)) / 2
             else:
                 sz = 0
-                for i in xrange(N_chunks):
+                for i in range(N_chunks):
                     M = e_mat[i*chunks_size:(i+1)*chunks_size]
                     sz += float(np.sum(M > 0))
                 if remainder != 0:
@@ -1099,10 +1102,10 @@ def wgraph(hdf5_file_name, w = None, method = 0):
                     
         if method in {0, 1}:
             chunks_size = get_chunk_size(N_cols, 2)
-            for i in xrange(0, N_rows, chunks_size):
+            for i in range(0, N_rows, chunks_size):
                 M = e_mat[i:min(i+chunks_size, N_rows)]
 
-                for j in xrange(M.shape[0]):
+                for j in range(M.shape[0]):
                     edges = np.where(M[j] > 0)[0]
                     weights = M[j, edges]
 
@@ -1126,9 +1129,9 @@ def wgraph(hdf5_file_name, w = None, method = 0):
                   "non-zero hyper-edges.".format(**locals()))
 
             chunks_size = get_chunk_size(N_rows, 2)
-            for i in xrange(0, N_cols, chunks_size):
+            for i in range(0, N_cols, chunks_size):
                 M = np.asarray(e_mat[:, i:min(i+chunks_size, N_cols)].todense())
-                for j in xrange(M.shape[1]):
+                for j in range(M.shape[1]):
                     edges = np.where(M[:, j] > 0)[0]
                     if method == 2:
                         weight = np.array(M[:, j].sum(), dtype = int)
@@ -1254,7 +1257,7 @@ def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
     indices_consensus_adjacency = np.empty(0, dtype = np.int32)
     indptr_consensus_adjacency = np.zeros(1, dtype = np.int64)
 
-    for k in xrange(N_consensus_labels):
+    for k in range(N_consensus_labels):
         indices_consensus_adjacency = np.append(indices_consensus_adjacency, np.where(consensus_labels == k)[0])
         indptr_consensus_adjacency = np.append(indptr_consensus_adjacency, indices_consensus_adjacency.size)
 
@@ -1276,7 +1279,7 @@ def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
     mutual_info_list = []
     cluster_dims_list =  [0]
 
-    for i in xrange(N_runs):
+    for i in range(N_runs):
         M = cluster_runs[i]
 
         mutual_info_list.append(ceEvalMutual(M, consensus_labels))
@@ -1299,7 +1302,7 @@ def overlap_matrix(hdf5_file_name, consensus_labels, cluster_runs):
             indices = np.append(indices, np.where(M == elt)[0])
             indptr.append(indices.size)
 
-            for k in xrange(N_consensus_labels):
+            for k in range(N_consensus_labels):
                 x = indices_consensus_adjacency[indptr_consensus_adjacency[k]:indptr_consensus_adjacency[k+1]]
                 unions[c, k] = np.union1d(indices, x).size 
  
