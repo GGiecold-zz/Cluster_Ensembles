@@ -48,7 +48,7 @@ import operator
 import pkg_resources
 import psutil
 import scipy.sparse
-from sklearn.metrics import jaccard_similarity_score
+from sklearn.metrics import jaccard_score
 from sklearn.metrics import normalized_mutual_info_score
 import subprocess
 import sys
